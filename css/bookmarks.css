@@ -1,0 +1,187 @@
+/* General styles for all menus */
+.cbp-spmenu {
+	background: #f6f7f9;
+	position: fixed;
+}
+
+.cbp-spmenu h3 {
+	color: #ffffff;
+    font-size: 1.9em;
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+    background: #172e60;
+}
+
+.cbp-spmenu a {
+	display: block;
+	color: #fff;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+
+.cbp-spmenu a:hover {
+	background: #258ecd;
+}
+
+.cbp-spmenu a:active {
+	background: #afdefa;
+	color: #47a3da;
+}
+
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+	width: 310px;
+	height: 100%;
+	top: 0;
+	z-index: 1000;
+	-webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 0 20px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 20px 10px rgba(0,0,0,0.1);
+}
+
+.cbp-spmenu-vertical a {
+	border-bottom: 1px solid #258ecd;
+	padding: 1em;
+}
+
+.cbp-spmenu-horizontal {
+	width: 100%;
+	height: 150px;
+	left: 0;
+	z-index: 1000;
+	overflow: hidden;
+}
+
+.cbp-spmenu-horizontal h3 {
+	height: 100%;
+	width: 20%;
+	float: left;
+}
+
+.cbp-spmenu-horizontal a {
+	float: left;
+	width: 20%;
+	padding: 0.8em;
+	border-left: 1px solid #258ecd;
+}
+
+/* Vertical menu that slides from the left or right */
+
+.cbp-spmenu-left {
+	left: -240px;
+}
+
+.cbp-spmenu-right {
+	right: -240px;
+}
+
+.cbp-spmenu-left.cbp-spmenu-open {
+	left: 0px;
+}
+
+.cbp-spmenu-right.cbp-spmenu-open {
+	right: 0px;
+	overflow: scroll;
+}
+
+/* Horizontal menu that slides from the top or bottom */
+
+.cbp-spmenu-top {
+	top: -150px;
+}
+
+.cbp-spmenu-bottom {
+	bottom: -150px;
+}
+
+.cbp-spmenu-top.cbp-spmenu-open {
+	top: 0px;
+}
+
+.cbp-spmenu-bottom.cbp-spmenu-open {
+	bottom: 0px;
+}
+
+/* Push classes applied to the body */
+
+.cbp-spmenu-push {
+	overflow-x: hidden;
+	position: relative;
+	left: 0;
+}
+
+.cbp-spmenu-push-toright {
+	left: 240px;
+}
+
+.cbp-spmenu-push-toleft {
+	left: -240px;
+}
+
+/* Transitions */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+/* CUSTOM STYLES */	
+
+.bookmark-items {
+	list-style: none;
+    margin: 0;
+    padding: 15px;
+    font:600 12px/16px 'Open Sans', sans-serif; 
+}
+
+.bookmark-items li {
+	margin-top: 4%; 
+}
+
+.bookmark-items .title {
+	font-size: 12px; 
+	line-height: 15px; 
+	margin-bottom: 4px;
+}
+
+.bookmark-items .subtitle {
+	font-size: 10px;
+}
+
+.bookmark-items .remover {
+	background: #FFFFFF;
+    color: #000000; 
+    border: 1px solid #c0c0c0;
+    border-radius: 6px;
+    padding: 2px 6px 2px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    float: right;
+}
+
+.bookmark-items .divisor {
+	width: 100%;
+	height: 1px;
+	border-bottom: 1px solid #e9ebee;
+	margin-top: 4%;
+}
+
+.bookmarks-close {
+	padding: 0;
+	font-size: 16px;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+}
+			
+@media only screen and (min-width : 320px) and (max-width :768px){
+	.bookmark-items .text {
+		padding: 20px;	
+	}
+}
