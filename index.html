@@ -1,63 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Favoritos Teste</title>
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bookmarks.css">
+    <meta charset="UTF-8">
+    <title>Favoritos Teste</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bookmarks.css">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/bookmarks.js"></script>
+    <script>
+    $(document).ready(function() {
 
-	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="js/handlebars.js"></script>
-	<script src="js/bookmarks.js"></script>
+	        Bookmark.init({
+                element: "[data-favs]",
+            },
+            function(bookmarks) {
 
-	<script>
+            },
 
-		$(document).ready(function() {
-			
-			Bookmark.init({
-				element: "[data-favs]", 
-			}, 
-			function(bookmarks) {
-
-				console.log(bookmarks); 
-
-				// $.get('views/sidebar.hbs', function(data){
-					
-				// }); 
+            function(item, status, bookmarks) {
+                // console.log(item);
+                // console.log(status);
+                // console.log(bookmarks);
+            });
 
 
-			},
+    });
+    </script>
+    <style>
+    button[bookmark-active="true"] {
+        background: red;
+        border-color: red; 
+        border: none;
+    }
 
-			function(item, status, bookmarks) {
-				// console.log(item);
-				// console.log(status);
-				// console.log(bookmarks);
-			}); 
-
-
-		}); 
-	</script>
-
-	<style>
-		button[bookmark-active="true"] {
-			background: red; 
-			border: none; 
-		}
-	</style>
+    button {
+    	width: 100%; 
+    	margin-top: 10px;
+    }
+    </style>
 </head>
+
 <body>
 	
-	<button bookmarks-open>Abrir SibeBar</button>
-	<div bookmark-sidebar></div>
+	<div bookmarks-sidebar bookmarks-open class="bookmarks-right cbp-spmenu-vertical"></div>
+   
+    <div class="container">
+        <div class="col-md-2"><button class="btn btn-success" data-favs data-id="1" data-group="imovel">Favorito</button></div>
+        <div class="col-md-2"><button class="btn btn-success" data-favs data-id="2" data-group="empreendimento">Favorito</button></div>
+        <div class="col-md-2"><button class="btn btn-success" data-favs data-id="3" data-group="imovel">Favorito</button></div>
+        <div class="col-md-2"><button class="btn btn-success" data-favs data-id="4" data-group="empreendimento">Favorito</button></div>
+        <div class="col-md-2"><button class="btn btn-success" data-favs data-id="5" data-group="imovel">Favorito</button></div>
+        <div class="col-md-2"><button class="btn btn-success" data-favs data-id="6" data-group="empreendimento">Favorito</button></div>
 
-	<button data-favs data-id="1" data-group="imovel">Favoritar</button>
-	<button data-favs data-id="2" data-group="imovel">Favoritar9</button>
-	<button data-favs data-id="3" data-group="empreendimento">Favoritar0</button>
-	<button data-favs data-id="4" data-group="imovel">Favoritar1</button>
-	<button data-favs data-id="5" data-group="empreendimento">Favoritar2</button>
-	<button data-favs data-id="6" data-group="imovel">Favoritar3</button>
-	<button data-favs data-id="7" data-group="imovel">Favoritar4</button>
+        <div class="col-md-3">
+			<button class="btn btn-warning" bookmarks-toggle>Toggle sidebar</button>        	
+        </div>
+
+       <!--  <div class="col-md-3">
+			<button class="btn btn-failure" data-favs data-id="1" data-group="empreendimento">Abrir sidebar</button>        	
+        </div> -->
+    </div>
+    <!-- /container -->
 </body>
+
 </html>

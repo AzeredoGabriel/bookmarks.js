@@ -1,18 +1,37 @@
 var Bookmark = (function($, Handlebars) {
     'use strict';
 
+    var _onToggle = function($sidebar, isActive) {
+            if (isActive)
+                $sidebar.removeAttribute(_removeBrackets(s.sidebar.open));
+            else
+                $sidebar.setAttribute(_removeBrackets(s.sidebar.open), "true");
+
+            return;
+        },
+        
+        _addToggleListenerCallback = function() {
+            if (typeof s.sidebar.onToggle == "function") {
+                var $sidebar = document.querySelector(s.sidebar.container);
+                var isActive = _isSidebarActive($sidebar);
+                s.sidebar.onToggle($sidebar, isActive);
+            }
+        };
+
     var s = {
             element: "[bookmark]",
             storage: "bookmarks",
             activeAttr: "bookmark-active",
             sidebar: {
                 template: 'views/sidebar.hbs',
-                container: '[bookmark-sidebar]',
+                container: '[bookmarks-sidebar]',
                 open: '[bookmarks-open]',
-                close: '[bookmarks-close]',
+                toggle: '[bookmarks-toggle]',
                 remove: '[bookmark-remove]',
+                onToggle: _onToggle
             }
         },
+
 
         _add = function(item, group, id) {
 
@@ -82,12 +101,41 @@ var Bookmark = (function($, Handlebars) {
                     var group = item.getAttribute("data-group");
 
                     if (/^[0-9]+$/.test(id) && bookmarks[group] && _exists(bookmarks[group], id) !== -1)
-                        item.setAttribute(s.activeAttr.replace(/^[\[.#]+|[\].#]+$/g, ""), "true");
+                        item.setAttribute(_removeBrackets(s.activeAttr), "true");
 
                     item.addEventListener('click', function() { callback(item, group, id); });
                 })(item);
             }
             return;
+        },
+
+        _addToggleListenerList = function(callback) {
+
+            var toggleElements = document.querySelectorAll(s.sidebar.toggle);
+
+            for (var i = 0; i < toggleElements.length; i++) {
+                var $element = toggleElements[i];
+
+                (function($element) {
+                    $element.addEventListener('click', function() { callback($element); });
+                })($element);
+            }
+        },
+
+        _filter = function(list) {
+            list = list || undefined;
+            var filtered = false;
+
+            if (Array.isArray(list)) {
+                var filtered = list.filter(function(item) {
+                    return item.hasAttribute("data-group") && item.hasAttribute("data-id");
+                });
+            }
+            return filtered;
+        },
+
+        _isActiveBookmark = function($item) {
+            return ($item.hasAttribute(s.activeAttr) ? true : false);
         },
 
         _getAsyncRequest = function(url, callback) {
@@ -105,24 +153,6 @@ var Bookmark = (function($, Handlebars) {
             xmlhttp.send(null);
         },
 
-
-        _filter = function(list) {
-            list = list || undefined;
-            var filtered = false;
-
-            if (Array.isArray(list)) {
-                var filtered = list.filter(function(item) {
-                    return item.hasAttribute("data-group") && item.hasAttribute("data-id");
-                });
-            }
-            return filtered;
-        },
-
-
-        _isActiveBookmark = function(item) {
-            return (item.hasAttribute(s.activeAttr) ? true : false);
-        },
-
         _loadSidebar = function(bookmarks) {
             _getAsyncRequest(s.sidebar.template, function(template) {
 
@@ -130,16 +160,30 @@ var Bookmark = (function($, Handlebars) {
                     console.log("Template não encontrado :(");
 
                 var $el = document.querySelector(s.sidebar.container);
-                $el.innerHTML = Handlebars.compile(template)(bookmarks);
+
+                if ($el) {
+                    
+                    $el.innerHTML = Handlebars.compile(template)(bookmarks);
+
+                    _addToggleListenerList(_addToggleListenerCallback);
+                }
 
                 return;
             });
         },
 
+        _isSidebarActive = function($sidebar) {
+            return $sidebar.hasAttribute(_removeBrackets(s.sidebar.open)) ? true : false;
+        },
+
+        _removeBrackets = function(string) {
+            return string.replace(/^[\[.#]+|[\].#]+$/g, "");
+        },
 
         _init = function(options, afterLoad, itemClick) {
+
             // o unico motivo de usar jquery é a linha abaixo.
-            s = $.extend({}, s, options);
+            s = $.extend(true, {}, s, options);
 
             var elements = document.querySelectorAll(s.element),
                 filtered;
@@ -150,8 +194,10 @@ var Bookmark = (function($, Handlebars) {
             filtered = _filter(elements);
 
             //adiciona o listner de click para cada objeto reconhecido como favorito
-            _addClickListenerList(filtered, function(item, group, id) {
-                var bookmarks = _isActiveBookmark(item) ? _remove(item, group, id) : _add(item, group, id);
+            _addClickListenerList(filtered, function($item, group, id) {
+                var bookmarks = _isActiveBookmark($item) ? _remove(item, group, id) : _add(item, group, id);
+
+                _loadSidebar(bookmarks);
                 itemClick(item, _isActiveBookmark(item), bookmarks);
 
                 return;
@@ -159,10 +205,15 @@ var Bookmark = (function($, Handlebars) {
 
             var bookmarks = _getStorage(s.storage);
 
-            if (s.sidebar)
+            if (s.sidebar) {
+
                 _loadSidebar(bookmarks);
 
+                _addToggleListenerList(_addToggleListenerCallback);
+            }
+
             afterLoad(bookmarks);
+
         };
 
 

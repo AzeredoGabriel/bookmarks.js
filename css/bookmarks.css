@@ -1,10 +1,10 @@
 /* General styles for all menus */
-.cbp-spmenu {
+div[bookmarks-sidebar]{
 	background: #f6f7f9;
 	position: fixed;
 }
 
-.cbp-spmenu h3 {
+div[bookmarks-sidebar] h3 {
 	color: #ffffff;
     font-size: 1.9em;
     padding: 20px;
@@ -13,18 +13,18 @@
     background: #172e60;
 }
 
-.cbp-spmenu a {
+div[bookmarks-sidebar] a {
 	display: block;
 	color: #fff;
 	font-size: 1.1em;
 	font-weight: 300;
 }
 
-.cbp-spmenu a:hover {
+div[bookmarks-sidebar] a:hover {
 	background: #258ecd;
 }
 
-.cbp-spmenu a:active {
+div[bookmarks-sidebar] a:active {
 	background: #afdefa;
 	color: #47a3da;
 }
@@ -75,18 +75,26 @@
 	left: -240px;
 }
 
-.cbp-spmenu-right {
-	right: -240px;
+.bookmarks-right {
+	right: -310px;
 }
 
 .cbp-spmenu-left.cbp-spmenu-open {
 	left: 0px;
 }
 
-.cbp-spmenu-right.cbp-spmenu-open {
+/*.cbp-spmenu-right.cbp-spmenu-open {
 	right: 0px;
-	overflow: scroll;
+	overflow-x: scroll;
 }
+*/
+
+
+div[bookmarks-open] {
+	right: 0px;
+	overflow-x: scroll;
+}
+
 
 /* Horizontal menu that slides from the top or bottom */
 
@@ -124,7 +132,7 @@
 
 /* Transitions */
 
-.cbp-spmenu,
+div[bookmarks-sidebar],
 .cbp-spmenu-push {
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
