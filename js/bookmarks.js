@@ -1,10 +1,17 @@
-var Bookmark = (function($) {
+var Bookmark = (function($, Handlebars) {
     'use strict';
 
     var s = {
             element: "[bookmark]",
             storage: "bookmarks",
-            activeAttr: "bookmark-active"
+            activeAttr: "bookmark-active",
+            sidebar: {
+                template: 'views/sidebar.hbs',
+                container: '[bookmark-sidebar]',
+                open: '[bookmarks-open]',
+                close: '[bookmarks-close]',
+                remove: '[bookmark-remove]',
+            }
         },
 
         _add = function(item, group, id) {
@@ -83,6 +90,22 @@ var Bookmark = (function($) {
             return;
         },
 
+        _getAsyncRequest = function(url, callback) {
+            var xmlhttp = new XMLHttpRequest();
+
+            var done = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    if (typeof callback == "function")
+                        callback(xmlhttp.responseText);
+                }
+            };
+
+            xmlhttp.onreadystatechange = done;
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send(null);
+        },
+
+
         _filter = function(list) {
             list = list || undefined;
             var filtered = false;
@@ -100,7 +123,19 @@ var Bookmark = (function($) {
             return (item.hasAttribute(s.activeAttr) ? true : false);
         },
 
-        
+        _loadSidebar = function(bookmarks) {
+            _getAsyncRequest(s.sidebar.template, function(template) {
+
+                if (!template)
+                    console.log("Template não encontrado :(");
+
+                var $el = document.querySelector(s.sidebar.container);
+                $el.innerHTML = Handlebars.compile(template)(bookmarks);
+
+                return;
+            });
+        },
+
 
         _init = function(options, afterLoad, itemClick) {
             // o unico motivo de usar jquery é a linha abaixo.
@@ -122,12 +157,17 @@ var Bookmark = (function($) {
                 return;
             });
 
-            afterLoad(_getStorage(s.storage)); 
-        }; 
+            var bookmarks = _getStorage(s.storage);
+
+            if (s.sidebar)
+                _loadSidebar(bookmarks);
+
+            afterLoad(bookmarks);
+        };
 
 
     return {
         init: _init
     }
 
-})(jQuery || {});
+})(jQuery, Handlebars);

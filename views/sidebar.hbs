@@ -1,23 +1,50 @@
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right cbp-spmenu-open" id="cbp-spmenu-s2">
-	<h3>Favoritos <span class="bookmarks-close pull-right">X</span></h3>
+	<h3>Favoritos <span class="bookmarks-close pull-right" bookmarks-close>X</span></h3>
 	
 	<ul class="bookmark-items">
-		<li>
-			<div class="row">
-				<div class="col-md-5 photo">
-					<img src="http://novaepoca.inforcedata.com.br/image/122887.jpg?wm=5" class="img-responsive">
-				</div>
-				<div class="col-md-7 text">
-					<p class="title">
-						<strong>Apartamento, Barra da Tijuca</strong>
-					</p>
-					<p class="subtitle">
-						2 Quarto(s), 3 Banheiro(s)
-					</p>	
-					<a href="" class="remover">X</a>		
-				</div>
-			</div>
-			<div class="divisor"></div>
+		<li class="title">
+			<h2>Imóveis</h2>
 		</li>
+		{{#each imovel}}
+			<li>
+				<div class="row">
+					<div class="col-md-5 photo">
+						<img src="http://novaepoca.inforcedata.com.br/image/122887.jpg?wm=5" class="img-responsive">
+					</div>
+					<div class="col-md-7 text">
+						<p class="title">
+							<strong>Apartamento, Barra da Tijuca</strong>
+						</p>
+						<p class="subtitle">
+							2 Quarto(s), 3 Banheiro(s)
+						</p>	
+						<a href="" class="remover" bookmark-remove>X</a>		
+					</div>
+				</div>
+				<div class="divisor"></div>
+			</li>
+		{{/each}}
+		<li class="title">
+			<h2>Empreendimentos</h2>
+		</li>
+		{{#each empreendimento}}
+			<li>
+				<div class="row">
+					<div class="col-md-5 photo">
+						<img src="http://novaepoca.inforcedata.com.br/image/122887.jpg?wm=5" class="img-responsive">
+					</div>
+					<div class="col-md-7 text">
+						<p class="title">
+							<strong>Apartamento, Barra da Tijuca</strong>
+						</p>
+						<p class="subtitle">
+							2 Quarto(s), 3 Banheiro(s)
+						</p>	
+						<a href="" class="remover">X</a>		
+					</div>
+				</div>
+				<div class="divisor"></div>
+			</li>
+		{{/each}}
 	</ul>
 </nav>

@@ -3,12 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Favoritos Teste</title>
-
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bookmarks.css">
 
-	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="js/handlebars.js"></script>
 	<script src="js/bookmarks.js"></script>
+
 	<script>
 
 		$(document).ready(function() {
@@ -20,9 +23,9 @@
 
 				console.log(bookmarks); 
 
-				$.get('views/sidebar.hbs', function(data){
-					console.log(data); 
-				}); 
+				// $.get('views/sidebar.hbs', function(data){
+					
+				// }); 
 
 
 			},
@@ -46,7 +49,8 @@
 </head>
 <body>
 	
-	<button>Abrir SibeBar</button>
+	<button bookmarks-open>Abrir SibeBar</button>
+	<div bookmark-sidebar></div>
 
 	<button data-favs data-id="1" data-group="imovel">Favoritar</button>
 	<button data-favs data-id="2" data-group="imovel">Favoritar9</button>
