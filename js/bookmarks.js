@@ -53,22 +53,7 @@ var Bookmark = (function($, Handlebars) {
                         
                         _compile(_templateCache, bookmarks);
 
-                        //TODO: 
-                        // Outra coisa "não tão bonita" feito nessa função. Preciso adicionar um eventListener de click
-                        // no 'x' no topo da sidebar, pois toda vez que clicamo s em remover um item, a sidebar é recompilada pelo 
-                        // Handlebars. Esse código poderia melhorar, por exemplo, poderiamos colocar apenas para o miolo da sidebar
-                        // ser recompilado e inserido à cada exclusão de item. Por causa do tempo, foi mais rápido utilizar o jquery 
-                        // para fazer isso.
-                        
-                        //sou preguiçoso, só usei o jQuery para encontrar o elemento mais facilmente. 
-                        var $closeEl = $(s.sidebar.container).find(s.sidebar.toggle); 
-
-                        if ($closeEl){
-                            $closeEl = $closeEl[0]; 
-                            $closeEl.addEventListener("click", _addToggleListenerCallback); 
-                        }
-                        
-                        _addRemoveListeners();
+                       
                     });
 
                 })($item);
@@ -142,6 +127,8 @@ var Bookmark = (function($, Handlebars) {
             return -1;
         },
 
+
+
         _addClickListenerList = function(list, callback) {
             var bookmarks = _getStorage(s.storage);
 
@@ -165,19 +152,6 @@ var Bookmark = (function($, Handlebars) {
                 })($item);
             }
             return;
-        },
-
-        _addToggleListenerList = function(callback) {
-
-            var toggleElements = document.querySelectorAll(s.sidebar.toggle);
-
-            for (var i = 0; i < toggleElements.length; i++) {
-                var $element = toggleElements[i];
-
-                (function($element) {
-                    $element.addEventListener('click', function() { callback($element); });
-                })($element);
-            }
         },
 
         _filter = function(list) {
@@ -213,39 +187,35 @@ var Bookmark = (function($, Handlebars) {
             xmlhttp.send(null);
         },
 
-        _loadSidebar = function(bookmarks) {
-            var compileAndRemove = function(template, bookmarks) {
-                _compile(template, bookmarks);
-                _addRemoveListeners();
-            }
-
-            if (!_templateCache) {
-                _getAsyncRequest(s.sidebar.template, function(template) {
-
-                    if (!template) {
-                        console.log("Template não encontrado :(");
-                    }
-
-                    //guarda o template não compilado 
-                    _templateCache = template;
-                    compileAndRemove(_templateCache, bookmarks); 
-
-                    //adicionar a função nos botões de toggle apenas da primeira vez
-                    _addToggleListenerList(_addToggleListenerCallback);
-                    return;
-                });
-
-            } else {
-                compileAndRemove(_templateCache, bookmarks); 
-            }
-           
-        },
+       
 
         _compile = function(template, bookmarks) {
             var $el = document.querySelector(s.sidebar.container);
 
+            //compila o arquivo de template com as informações corretas
             if ($el)
                 $el.innerHTML = Handlebars.compile(template)(bookmarks);
+
+            //carrega os listeners de remoção
+            _addRemoveListeners(); 
+            _addCloseSidebarListener(); 
+        },
+
+        _addCloseSidebarListener = function() {
+            //TODO: 
+            // Outra coisa "não tão bonita" feito nessa função. Preciso adicionar um eventListener de click
+            // no 'x' no topo da sidebar, pois toda vez que clicamo s em remover um item, a sidebar é recompilada pelo 
+            // Handlebars. Esse código poderia melhorar, por exemplo, poderiamos colocar apenas para o miolo da sidebar
+            // ser recompilado e inserido à cada exclusão de item. Por causa do tempo, foi mais rápido utilizar o jquery 
+            // para fazer isso.
+            
+            //sou preguiçoso, só usei o jQuery para encontrar o elemento mais facilmente. 
+            var $closeEl = $(s.sidebar.container).find(s.sidebar.toggle); 
+
+            if ($closeEl){
+                $closeEl = $closeEl[0]; 
+                $closeEl.addEventListener("click", _addToggleListenerCallback); 
+            }
         },
 
         _isSidebarActive = function($sidebar) {
@@ -256,22 +226,79 @@ var Bookmark = (function($, Handlebars) {
             return string.replace(/^[\[.#]+|[\].#]+$/g, "");
         },
 
+        _addToggleListenerList = function(callback) {
+
+            var toggleElements = document.querySelectorAll(s.sidebar.toggle);
+
+            for (var i = 0; i < toggleElements.length; i++) {
+                var $element = toggleElements[i];
+
+                (function($element) {
+                    $element.addEventListener('click', function() { callback($element); });
+                })($element);
+            }
+        },
+
+        _loadSidebar = function(bookmarks) {
+
+            //deveria executar os 3 processos repetidamente
+            // compila o template do cache
+            // insere do HTML marcado data-sidebar
+            // roda os listeners dentro da sidebar
+    
+         
+            if (!_templateCache) {
+                _getAsyncRequest(s.sidebar.template, function(template) {
+
+                    if (!template) {
+                        console.log("Template não encontrado :(");
+                    }
+
+                    //grava no cache
+                    _templateCache = template;
+                    
+                    //adicionar a função nos botões de toggle apenas da primeira vez
+                    // está dentro dessa função para ter certeza que só foi ativado depois
+                    // que o template está carregado. 
+                    _addToggleListenerList(_addToggleListenerCallback);
+
+                    //compila o template e adiciona dentro do container especificado
+                    _compile(_templateCache, bookmarks);
+                    
+                    return;
+                });
+
+            } else {
+                //compila o template e adiciona dentro do container especificado
+                _compile(_templateCache, bookmarks);
+            }
+           
+        },
+
+
         _init = function(options, afterLoad, itemClick) {
 
-            // o unico motivo de usar jquery é a linha abaixo.
+            //extende os parametros passados pelo usuário
             s = $.extend(true, {}, s, options);
 
+      
+            //pega os elementos "bookmarks" na página
             var elements = document.querySelectorAll(s.element),
                 filtered;
 
-            //deixa guardado em uma variável os elementos marcados como favoritos
+
+            //filtra esses elementos pelo data-id e data-group e cria um cache desse resultado
             _bookmarksMarkedCache = filtered = _filter(elements);
 
+
             //adiciona o listner de click para cada objeto reconhecido como favorito
-            _addClickListenerList(filtered, function($item, group, id) {
+            _addClickListenerList(filtered, function($item, group, id) { // <- dentro do click em algum favoritos
+                //adiciona ou remove o item do localstorage e a marcação de activeAttr
                 var bookmarks = _isActiveBookmark($item) ? _remove($item, group, id) : _add($item, group, id);
 
-                _loadSidebar(bookmarks);
+                if (s.sidebar)
+                    _loadSidebar(bookmarks);
+                
                 itemClick($item, _isActiveBookmark($item), bookmarks);
 
                 return;
@@ -282,6 +309,8 @@ var Bookmark = (function($, Handlebars) {
             if (s.sidebar) {
 
                 _loadSidebar(bookmarks);
+
+
                 //_addToggleListenerList(_addToggleListenerCallback);
             }
 
