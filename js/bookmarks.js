@@ -88,23 +88,23 @@ var Bookmark = (function($, Handlebars) {
             var bookmarks = _getStorage(s.storage);
 
             for (var i = 0; i < list.length; i++) {
-                var item = list[i];
+                var $item = list[i];
 
                 /**
                  * @dica
                  * usando closure ("fechamento") para gerar uma função anonima 
-                 * que cria uma nova referencia para item   
+                 * que cria uma nova referencia para $item   
                  */
 
-                (function(item) {
-                    var id = item.getAttribute("data-id");
-                    var group = item.getAttribute("data-group");
+                (function($item) {
+                    var id = $item.getAttribute("data-id");
+                    var group = $item.getAttribute("data-group");
 
                     if (/^[0-9]+$/.test(id) && bookmarks[group] && _exists(bookmarks[group], id) !== -1)
-                        item.setAttribute(_removeBrackets(s.activeAttr), "true");
+                        $item.setAttribute(_removeBrackets(s.activeAttr), "true");
 
-                    item.addEventListener('click', function() { callback(item, group, id); });
-                })(item);
+                    $item.addEventListener('click', function() { callback($item, group, id); });
+                })($item);
             }
             return;
         },
@@ -127,8 +127,8 @@ var Bookmark = (function($, Handlebars) {
             var filtered = false;
 
             if (Array.isArray(list)) {
-                var filtered = list.filter(function(item) {
-                    return item.hasAttribute("data-group") && item.hasAttribute("data-id");
+                var filtered = list.filter(function($item) {
+                    return $item.hasAttribute("data-group") && $item.hasAttribute("data-id");
                 });
             }
             return filtered;
@@ -195,10 +195,10 @@ var Bookmark = (function($, Handlebars) {
 
             //adiciona o listner de click para cada objeto reconhecido como favorito
             _addClickListenerList(filtered, function($item, group, id) {
-                var bookmarks = _isActiveBookmark($item) ? _remove(item, group, id) : _add(item, group, id);
+                var bookmarks = _isActiveBookmark($item) ? _remove($item, group, id) : _add($item, group, id);
 
                 _loadSidebar(bookmarks);
-                itemClick(item, _isActiveBookmark(item), bookmarks);
+                itemClick($item, _isActiveBookmark($item), bookmarks);
 
                 return;
             });
