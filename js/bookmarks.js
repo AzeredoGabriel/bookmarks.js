@@ -1,7 +1,10 @@
 var Bookmark = (function($, Handlebars) {
     'use strict';
 
-    var _onToggle = function($sidebar, isActive) {
+    var _templateCache,
+        _bookmarksMarkedCache,
+
+        _onToggle = function($sidebar, isActive) {
             if (isActive)
                 $sidebar.removeAttribute(_removeBrackets(s.sidebar.open));
             else
@@ -9,14 +12,69 @@ var Bookmark = (function($, Handlebars) {
 
             return;
         },
-        
+
         _addToggleListenerCallback = function() {
             if (typeof s.sidebar.onToggle == "function") {
                 var $sidebar = document.querySelector(s.sidebar.container);
                 var isActive = _isSidebarActive($sidebar);
                 s.sidebar.onToggle($sidebar, isActive);
             }
-        };
+        },
+        _addRemoveListeners = function() {
+            var removable = document.querySelectorAll(s.sidebar.remove);
+            removable = _filter(removable);
+
+            for (var i = 0; i < removable.length; i++) {
+                var $item = removable[i];
+
+                (function($item) {
+
+                    var group = $item.getAttribute("data-group");
+                    var id = $item.getAttribute("data-id");
+
+                    $item.addEventListener("click", function() {
+
+                        //TODO: 
+                        // Essa parte do código não está muito correta, poderia ser feito de outra forma.
+                        // Quando o usuário clicar no x dentro da sidebar, para remover um item, também precisamos que 
+                        // o item referente a ele, que está fora da sidebar também seja desmarcado. 
+                        // Então, pego os itens reconhecidos como bookmarks inicialmente do "cache" e filtro pelo id do item
+                        // clicado. 
+                        // após isso, utilizo a função "_remove" para aplicar a rotina de remoção sobre esse item.
+                        
+                        var $filteredItem = _bookmarksMarkedCache.filter(function($el) {
+                            return $el.getAttribute("data-id") == id;
+                        });
+
+                        if ($filteredItem)
+                            $filteredItem = $filteredItem[0];
+
+                        var bookmarks = _remove($filteredItem, group, id);
+                        
+                        _compile(_templateCache, bookmarks);
+
+                        //TODO: 
+                        // Outra coisa "não tão bonita" feito nessa função. Preciso adicionar um eventListener de click
+                        // no 'x' no topo da sidebar, pois toda vez que clicamo s em remover um item, a sidebar é recompilada pelo 
+                        // Handlebars. Esse código poderia melhorar, por exemplo, poderiamos colocar apenas para o miolo da sidebar
+                        // ser recompilado e inserido à cada exclusão de item. Por causa do tempo, foi mais rápido utilizar o jquery 
+                        // para fazer isso.
+                        
+                        //sou preguiçoso, só usei o jQuery para encontrar o elemento mais facilmente. 
+                        var $closeEl = $(s.sidebar.container).find(s.sidebar.toggle); 
+
+                        if ($closeEl){
+                            $closeEl = $closeEl[0]; 
+                            $closeEl.addEventListener("click", _addToggleListenerCallback); 
+                        }
+                        
+                        _addRemoveListeners();
+                    });
+
+                })($item);
+            }
+        }; 
+
 
     var s = {
             element: "[bookmark]",
@@ -126,11 +184,13 @@ var Bookmark = (function($, Handlebars) {
             list = list || undefined;
             var filtered = false;
 
-            if (Array.isArray(list)) {
-                var filtered = list.filter(function($item) {
-                    return $item.hasAttribute("data-group") && $item.hasAttribute("data-id");
-                });
-            }
+            if (!Array.isArray(list))
+                list = Array.prototype.slice.call(list)
+
+            var filtered = list.filter(function($item) {
+                return $item.hasAttribute("data-group") && $item.hasAttribute("data-id");
+            });
+
             return filtered;
         },
 
@@ -154,22 +214,38 @@ var Bookmark = (function($, Handlebars) {
         },
 
         _loadSidebar = function(bookmarks) {
-            _getAsyncRequest(s.sidebar.template, function(template) {
+            var compileAndRemove = function(template, bookmarks) {
+                _compile(template, bookmarks);
+                _addRemoveListeners();
+            }
 
-                if (!template)
-                    console.log("Template não encontrado :(");
+            if (!_templateCache) {
+                _getAsyncRequest(s.sidebar.template, function(template) {
 
-                var $el = document.querySelector(s.sidebar.container);
+                    if (!template) {
+                        console.log("Template não encontrado :(");
+                    }
 
-                if ($el) {
-                    
-                    $el.innerHTML = Handlebars.compile(template)(bookmarks);
+                    //guarda o template não compilado 
+                    _templateCache = template;
+                    compileAndRemove(_templateCache, bookmarks); 
 
+                    //adicionar a função nos botões de toggle apenas da primeira vez
                     _addToggleListenerList(_addToggleListenerCallback);
-                }
+                    return;
+                });
 
-                return;
-            });
+            } else {
+                compileAndRemove(_templateCache, bookmarks); 
+            }
+           
+        },
+
+        _compile = function(template, bookmarks) {
+            var $el = document.querySelector(s.sidebar.container);
+
+            if ($el)
+                $el.innerHTML = Handlebars.compile(template)(bookmarks);
         },
 
         _isSidebarActive = function($sidebar) {
@@ -188,10 +264,8 @@ var Bookmark = (function($, Handlebars) {
             var elements = document.querySelectorAll(s.element),
                 filtered;
 
-            //fix to convert a nodeList to Array
-            elements = Array.prototype.slice.call(elements);
-
-            filtered = _filter(elements);
+            //deixa guardado em uma variável os elementos marcados como favoritos
+            _bookmarksMarkedCache = filtered = _filter(elements);
 
             //adiciona o listner de click para cada objeto reconhecido como favorito
             _addClickListenerList(filtered, function($item, group, id) {
@@ -208,8 +282,7 @@ var Bookmark = (function($, Handlebars) {
             if (s.sidebar) {
 
                 _loadSidebar(bookmarks);
-
-                _addToggleListenerList(_addToggleListenerCallback);
+                //_addToggleListenerList(_addToggleListenerCallback);
             }
 
             afterLoad(bookmarks);
