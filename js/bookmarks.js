@@ -118,9 +118,9 @@ var Bookmark = (function($, Handlebars) {
             return data ? localStorage.setItem(storage, json) : false;
         },
 
-        _exists = function(bookmarks, id) {
-            if (Array.isArray(bookmarks) && id) {
-                var index = bookmarks.indexOf(id);
+        _exists = function(bookmarksGrouped, id) {
+            if (Array.isArray(bookmarksGroup) && id) {
+                var index = bookmarksGroup.indexOf(id);
                 return index;
             }
 
@@ -187,8 +187,6 @@ var Bookmark = (function($, Handlebars) {
             xmlhttp.send(null);
         },
 
-       
-
         _compile = function(template, bookmarks) {
             var $el = document.querySelector(s.sidebar.container);
 
@@ -251,7 +249,7 @@ var Bookmark = (function($, Handlebars) {
                 _getAsyncRequest(s.sidebar.template, function(template) {
 
                     if (!template) {
-                        console.log("Template não encontrado :(");
+                       throw "Template não encontrado :(";
                     }
 
                     //grava no cache
@@ -275,47 +273,96 @@ var Bookmark = (function($, Handlebars) {
            
         },
 
+        //FUNÇÃO AINDA NÃO UTILIZADA
+        _filterByTheCache = function(needles, haystack, identifier) {
+            /**
+             * Procura uma lista de ids no cache, só retorna os ids que NÃO EXISTIREM
+             */
+            
+
+            
+            if (!Array.isArray(needles))
+               throw "Primeiro parâmetro não é um array"; 
+
+           $filtered_needles = []; 
+
+           for (var i = 0; i < needles.length; i++) {
+               
+           }
+
+            $filtered_list = needles.filter(function(item){
+                return needles.indexOf(item[identifier]) == -1; 
+            });
+            return $filtered_list; 
+        },
+
+        //FUNÇÃO AINDA NÃO UTILIZADA
+        _generateApiList = function(bookmarks) {
+            
+            /**
+             * @function
+             * Essa função tem a responsabilidade de:
+             * 1) filtrar no cache de bookmarks se ja existe algum 'id' passado em bookmarks e retornar apenas os que não existirem
+             * 2) montar a lista de urls usando o parametro 'url' passado pelo usuário, dividindo seus devidos grupos e passando os 'ids' referentes a cada grupo
+             * 3)  
+             */
+          
+
+            var urls = []; 
+            for (group in bookmarks) {
+                if (group && Array.isArray(bookmarks[group]) && bookmarks[group].length > 0)
+                    urls.push(s.url.replace('{{group}}', group) + bookmarks[group].join())
+            }
+
+            return urls; 
+        },
 
         _init = function(options, afterLoad, itemClick) {
 
             //extende os parametros passados pelo usuário
             s = $.extend(true, {}, s, options);
-
       
             //pega os elementos "bookmarks" na página
             var elements = document.querySelectorAll(s.element),
                 filtered;
 
-
             //filtra esses elementos pelo data-id e data-group e cria um cache desse resultado
             _bookmarksMarkedCache = filtered = _filter(elements);
-
 
             //adiciona o listner de click para cada objeto reconhecido como favorito
             _addClickListenerList(filtered, function($item, group, id) { // <- dentro do click em algum favoritos
                 //adiciona ou remove o item do localstorage e a marcação de activeAttr
                 var bookmarks = _isActiveBookmark($item) ? _remove($item, group, id) : _add($item, group, id);
-
                 if (s.sidebar)
                     _loadSidebar(bookmarks);
                 
                 itemClick($item, _isActiveBookmark($item), bookmarks);
-
                 return;
             });
-
+            
             var bookmarks = _getStorage(s.storage);
-
+            
             if (s.sidebar) {
+                
+                if (!s.url)
+                    throw "Parâmetro 'url' não definido"; 
+
+                /**
+                 * TODO:
+                 * Nesse ponto, precisamos seguir o seguinte fluxo: 
+                 * 1) Mergear os bookmarks de _getStorage com os bookmarks encontrados na página
+                 * 2) Criar um array de urls de api para buscar esses dados reais
+                 * 3) Com esse array de urls, disparar essas requisições para a api e coletar os dados completos
+                 * 4) Criar uma variável de cache para os dados em memória 
+                 * 5) enviar esse novo objeto com os dados completos para a função _loadSidebar()
+                 */
+
 
                 _loadSidebar(bookmarks);
-
-
-                //_addToggleListenerList(_addToggleListenerCallback);
             }
-
+            
+            
             afterLoad(bookmarks);
-
         };
 
 
