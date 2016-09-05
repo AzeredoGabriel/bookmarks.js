@@ -3,6 +3,7 @@ var Bookmark = (function($, Handlebars) {
 
     var _templateCache,
         _bookmarksMarkedCache,
+        _bookmarksDataCache = {},
 
         _onToggle = function($sidebar, isActive) {
             if (isActive)
@@ -14,7 +15,7 @@ var Bookmark = (function($, Handlebars) {
         },
 
         _addToggleListenerCallback = function() {
-            if (typeof s.sidebar.onToggle == "function") {
+            if (typeof s.sidebar.onToggle === "function") {
                 var $sidebar = document.querySelector(s.sidebar.container);
                 var isActive = _isSidebarActive($sidebar);
                 s.sidebar.onToggle($sidebar, isActive);
@@ -119,14 +120,13 @@ var Bookmark = (function($, Handlebars) {
         },
 
         _exists = function(bookmarksGrouped, id) {
-            if (Array.isArray(bookmarksGroup) && id) {
-                var index = bookmarksGroup.indexOf(id);
+            if (Array.isArray(bookmarksGrouped) && id) {
+                var index = bookmarksGrouped.indexOf(id);
                 return index;
             }
 
             return -1;
         },
-
 
 
         _addClickListenerList = function(list, callback) {
@@ -172,19 +172,24 @@ var Bookmark = (function($, Handlebars) {
             return ($item.hasAttribute(s.activeAttr) ? true : false);
         },
 
-        _getAsyncRequest = function(url, callback) {
+        _getAsyncRequest = function(url, callback, exec=true) {
             var xmlhttp = new XMLHttpRequest();
 
             var done = function() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    if (typeof callback == "function")
+                    if (typeof callback === "function")
                         callback(xmlhttp.responseText);
                 }
             };
 
             xmlhttp.onreadystatechange = done;
             xmlhttp.open("GET", url, true);
+
+            if (!exec)
+                return xmlhttp; 
+
             xmlhttp.send(null);
+            
         },
 
         _compile = function(template, bookmarks) {
@@ -274,47 +279,81 @@ var Bookmark = (function($, Handlebars) {
         },
 
         //FUNÇÃO AINDA NÃO UTILIZADA
-        _filterByTheCache = function(needles, haystack, identifier) {
-            /**
-             * Procura uma lista de ids no cache, só retorna os ids que NÃO EXISTIREM
-             */
-            
+        // _filterByTheCache = function(needles, haystack, identifier) {
+        //     /**
+        //      * Procura uma lista de ids no cache, só retorna os ids que NÃO EXISTIREM
+        //      */
 
             
-            if (!Array.isArray(needles))
-               throw "Primeiro parâmetro não é um array"; 
+        //     if (!Array.isArray(needles))
+        //        throw "Primeiro parâmetro não é um array"; 
 
-           $filtered_needles = []; 
+        //    $filtered_needles = []; 
 
-           for (var i = 0; i < needles.length; i++) {
+        //    for (var i = 0; i < needles.length; i++) {
                
-           }
+        //    }
 
-            $filtered_list = needles.filter(function(item){
-                return needles.indexOf(item[identifier]) == -1; 
-            });
-            return $filtered_list; 
+        //     $filtered_list = needles.filter(function(item){
+        //         return needles.indexOf(item[identifier]) == -1; 
+        //     });
+        //     return $filtered_list; 
+        // },
+
+        _mergeBookmarks = function(bookmarks, detectedBookmarks) {
+            
+            if (!Array.isArray(detectedBookmarks))
+                throw "A variável datectedBookmarks não é um array!"; 
+
+            for (var i = 0; i < detectedBookmarks.length; i++) {
+                var group = detectedBookmarks[i].getAttribute("data-group");
+                var id = detectedBookmarks[i].getAttribute("data-id");
+
+                if (bookmarks[group]) {
+                    if (bookmarks[group].indexOf(id) == -1)
+                        bookmarks[group].push(id); 
+                }
+            }
+            
+            return bookmarks; 
         },
 
-        //FUNÇÃO AINDA NÃO UTILIZADA
         _generateApiList = function(bookmarks) {
-            
-            /**
-             * @function
-             * Essa função tem a responsabilidade de:
-             * 1) filtrar no cache de bookmarks se ja existe algum 'id' passado em bookmarks e retornar apenas os que não existirem
-             * 2) montar a lista de urls usando o parametro 'url' passado pelo usuário, dividindo seus devidos grupos e passando os 'ids' referentes a cada grupo
-             * 3)  
-             */
-          
+           
+            var urls = {}; 
+            for (var group in bookmarks) {
+                if (group && Array.isArray(bookmarks[group]) && bookmarks[group].length > 0) {
+                    
+                    //TODO: 
+                    //Criar função para verificar com o cache de dados reais, se algum id já existe, se existir, não precisa
+                    //mandar para api
 
-            var urls = []; 
-            for (group in bookmarks) {
-                if (group && Array.isArray(bookmarks[group]) && bookmarks[group].length > 0)
-                    urls.push(s.url.replace('{{group}}', group) + bookmarks[group].join())
+                    urls[group] = s.url.replace('{{group}}', group) + "?ids=" + bookmarks[group].join()
+                }
+                
             }
 
             return urls; 
+        },
+
+        _requestsApiList = function(list, callback) {
+            
+            for (var group in list) {
+                
+                (function (group, item) {
+                    var xmlhttp = _getAsyncRequest(item, callback, false); 
+                    xmlhttp.onreadystatechange = function(){
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            if (typeof callback === "function")
+                                callback(group, xmlhttp.responseText);
+                        }
+                    }
+                    
+                    xmlhttp.send(null); 
+                })(group, list[group]);
+                
+
+            }
         },
 
         _init = function(options, afterLoad, itemClick) {
@@ -347,18 +386,36 @@ var Bookmark = (function($, Handlebars) {
                 if (!s.url)
                     throw "Parâmetro 'url' não definido"; 
 
+                var merged = _mergeBookmarks(bookmarks, _bookmarksMarkedCache); 
+                var list = _generateApiList(merged); 
+                
+                //_bookmarksObjectCache =  _getApiData(list); 
+                
                 /**
-                 * TODO:
-                 * Nesse ponto, precisamos seguir o seguinte fluxo: 
-                 * 1) Mergear os bookmarks de _getStorage com os bookmarks encontrados na página
-                 * 2) Criar um array de urls de api para buscar esses dados reais
-                 * 3) Com esse array de urls, disparar essas requisições para a api e coletar os dados completos
-                 * 4) Criar uma variável de cache para os dados em memória 
-                 * 5) enviar esse novo objeto com os dados completos para a função _loadSidebar()
+                 * @function
+                 * _requestsApiList 
+                 *
+                 * Passamos como parâmetro uma lista de urls de API para cada group detectado e também passamos um callback 
+                 * para ser executado quando a resposta retornar no servidor.
                  */
 
+                _requestsApiList(list, function(group, response){
 
-                _loadSidebar(bookmarks);
+                    //callback que será executado quando retornar cada request para API. 
+                    // gravar objeto em uma variável 
+                    console.log(response); 
+
+                    if (group && response){
+                        _bookmarksDataCache[group] = JSON.parse(response);
+                    }
+
+                    // pesquisar no cache ps itens que estão no _getStorage() atual e enviar para o _loadsidebar
+                    // _loadsidebar também vai ter acesso ao cache. 
+                    _loadSidebar(_bookmarksDataCache);
+                    
+                    console.log(_bookmarksDataCache); 
+                });
+
             }
             
             
