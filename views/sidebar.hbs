@@ -11,16 +11,16 @@
 			<li>
 				<div class="row">
 					<div class="col-md-5 photo">
-						<img src="http://novaepoca.inforcedata.com.br/image/122887.jpg?wm=5" class="img-responsive">
+						<img src="http://novaepoca.inforcedata.com.br/image/{{Imagens.0.ImagemID}}.jpg?wm=5" class="img-responsive">
 					</div>
 					<div class="col-md-7 text">
 						<p class="title">
 							<strong>{{TipoNome}}, {{BairroNome}}</strong>
 						</p>
 						<p class="subtitle">
-							2 Quarto(s), 3 Banheiro(s)
+							{{QtdQuarto}} Quarto(s), {{QtdWcTotal}} Banheiro(s)
 						</p>	
-						<a class="remover" bookmark-remove data-group="imovel" data-id="2">X</a>		
+						<a class="remover" bookmark-remove data-group="imovel" data-id="{{ID}}">X</a>		
 					</div>
 				</div>
 				<div class="divisor"></div>
@@ -40,9 +40,9 @@
 							<strong>{{Nome}}</strong>
 						</p>
 						<p class="subtitle">
-							2 Quarto(s), 3 Banheiro(s)
+							{{NaturezaNome}}, {{CidadeNome}}
 						</p>	
-						<a class="remover" bookmark-remove bookmark-remove data-group="imovel" data-id="{{@key}}">X</a>		
+						<a class="remover" bookmark-remove data-group="empreendimento" data-id="{{ID}}">X</a>		
 					</div>
 				</div>
 				<div class="divisor"></div>

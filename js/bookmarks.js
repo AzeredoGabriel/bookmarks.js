@@ -7,6 +7,7 @@ var Bookmark = (function($, Handlebars) {
         _currentSidebarData = {},
 
         _onToggle = function($sidebar, isActive) {
+
             if (isActive)
                 $sidebar.removeAttribute(_removeBrackets(s.sidebar.open));
             else
@@ -43,7 +44,7 @@ var Bookmark = (function($, Handlebars) {
                         // Então, pego os itens reconhecidos como bookmarks inicialmente do "cache" e filtro pelo id do item
                         // clicado. 
                         // após isso, utilizo a função "_remove" para aplicar a rotina de remoção sobre esse item.
-                        
+
                         var $filteredItem = _bookmarksMarkedCache.filter(function($el) {
                             return $el.getAttribute("data-id") == id;
                         });
@@ -54,15 +55,15 @@ var Bookmark = (function($, Handlebars) {
                         var bookmarks = _remove($filteredItem, group, id);
 
                         _currentSidebarData[group] = _filterFullData(_bookmarksDataCache[group], bookmarks[group]);
-                        
+
                         _compile(_templateCache, _currentSidebarData);
 
-                       
+
                     });
 
                 })($item);
             }
-        }; 
+        };
 
 
     var s = {
@@ -175,7 +176,7 @@ var Bookmark = (function($, Handlebars) {
             return ($item.hasAttribute(s.activeAttr) ? true : false);
         },
 
-        _getAsyncRequest = function(url, callback, exec=true) {
+        _getAsyncRequest = function(url, callback, exec = true) {
             var xmlhttp = new XMLHttpRequest();
 
             var done = function() {
@@ -189,10 +190,10 @@ var Bookmark = (function($, Handlebars) {
             xmlhttp.open("GET", url, true);
 
             if (!exec)
-                return xmlhttp; 
+                return xmlhttp;
 
             xmlhttp.send(null);
-            
+
         },
 
         _compile = function(template, bookmarks) {
@@ -203,8 +204,8 @@ var Bookmark = (function($, Handlebars) {
                 $el.innerHTML = Handlebars.compile(template)(bookmarks);
 
             //carrega os listeners de remoção
-            _addRemoveListeners(); 
-            _addCloseSidebarListener(); 
+            _addRemoveListeners();
+            _addCloseSidebarListener();
         },
 
         _addCloseSidebarListener = function() {
@@ -214,13 +215,14 @@ var Bookmark = (function($, Handlebars) {
             // Handlebars. Esse código poderia melhorar, por exemplo, poderiamos colocar apenas para o miolo da sidebar
             // ser recompilado e inserido à cada exclusão de item. Por causa do tempo, foi mais rápido utilizar o jquery 
             // para fazer isso.
-            
-            //sou preguiçoso, só usei o jQuery para encontrar o elemento mais facilmente. 
-            var $closeEl = $(s.sidebar.container).find(s.sidebar.toggle); 
 
-            if ($closeEl){
-                $closeEl = $closeEl[0]; 
-                $closeEl.addEventListener("click", _addToggleListenerCallback); 
+            //sou preguiçoso, só usei o jQuery para encontrar o elemento mais facilmente. 
+            var $closeEl = $(s.sidebar.container).find(s.sidebar.toggle);
+
+            if ($closeEl) {
+                $closeEl = $closeEl[0];
+                console.log($closeEl);
+                $closeEl.addEventListener("click", _addToggleListenerCallback);
             }
         },
 
@@ -240,6 +242,7 @@ var Bookmark = (function($, Handlebars) {
                 var $element = toggleElements[i];
 
                 (function($element) {
+                    console.log($element);
                     $element.addEventListener('click', function() { callback($element); });
                 })($element);
             }
@@ -251,18 +254,18 @@ var Bookmark = (function($, Handlebars) {
             // compila o template do cache
             // insere do HTML marcado data-sidebar
             // roda os listeners dentro da sidebar
-    
-         
+
+
             if (!_templateCache) {
                 _getAsyncRequest(s.sidebar.template, function(template) {
 
                     if (!template) {
-                       throw "Template não encontrado :(";
+                        throw "Template não encontrado :(";
                     }
 
                     //grava no cache
                     _templateCache = template;
-                    
+
                     //adicionar a função nos botões de toggle apenas da primeira vez
                     // está dentro dessa função para ter certeza que só foi ativado depois
                     // que o template está carregado. 
@@ -270,7 +273,7 @@ var Bookmark = (function($, Handlebars) {
 
                     //compila o template e adiciona dentro do container especificado
                     _compile(_templateCache, bookmarks);
-                    
+
                     return;
                 });
 
@@ -278,35 +281,13 @@ var Bookmark = (function($, Handlebars) {
                 //compila o template e adiciona dentro do container especificado
                 _compile(_templateCache, bookmarks);
             }
-           
+
         },
 
-        //FUNÇÃO AINDA NÃO UTILIZADA
-        // _filterByTheCache = function(needles, haystack, identifier) {
-        //     /**
-        //      * Procura uma lista de ids no cache, só retorna os ids que NÃO EXISTIREM
-        //      */
-
-            
-        //     if (!Array.isArray(needles))
-        //        throw "Primeiro parâmetro não é um array"; 
-
-        //    $filtered_needles = []; 
-
-        //    for (var i = 0; i < needles.length; i++) {
-               
-        //    }
-
-        //     $filtered_list = needles.filter(function(item){
-        //         return needles.indexOf(item[identifier]) == -1; 
-        //     });
-        //     return $filtered_list; 
-        // },
-
         _mergeBookmarks = function(bookmarks, detectedBookmarks) {
-            
+
             if (!Array.isArray(detectedBookmarks))
-                throw "A variável datectedBookmarks não é um array!"; 
+                throw "A variável datectedBookmarks não é um array!";
 
             for (var i = 0; i < detectedBookmarks.length; i++) {
                 var group = detectedBookmarks[i].getAttribute("data-group");
@@ -314,19 +295,19 @@ var Bookmark = (function($, Handlebars) {
 
                 if (bookmarks[group]) {
                     if (bookmarks[group].indexOf(id) == -1)
-                        bookmarks[group].push(id); 
+                        bookmarks[group].push(id);
                 }
             }
-            
-            return bookmarks; 
+
+            return bookmarks;
         },
 
         _generateApiList = function(bookmarks) {
-           
-            var urls = {}; 
+
+            var urls = {};
             for (var group in bookmarks) {
                 if (group && Array.isArray(bookmarks[group]) && bookmarks[group].length > 0) {
-                    
+
                     //TODO: 
                     //Criar função para verificar com o cache de dados reais, se algum id já existe, se existir, não precisa
                     //mandar para api
@@ -334,28 +315,36 @@ var Bookmark = (function($, Handlebars) {
 
                     urls[group] = s.url.replace('{{group}}', group) + "?ids=" + bookmarks[group].join()
                 }
-                
+
             }
 
-            return urls; 
+            return urls;
         },
 
         _requestsApiList = function(list, callback) {
-            
+
+
+            var count = 1;
+            var maxlength = Object.keys(list).length;
+
             for (var group in list) {
-                
-                (function (group, item) {
-                    var xmlhttp = _getAsyncRequest(item, callback, false); 
-                    xmlhttp.onreadystatechange = function(){
+
+                var last = (maxlength == count ? true : false);
+
+                (function(group, item, last) {
+                    var xmlhttp = _getAsyncRequest(item, callback, false);
+                    xmlhttp.onreadystatechange = function() {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             if (typeof callback === "function")
-                                callback(group, xmlhttp.responseText);
+                                callback(group, xmlhttp.responseText, last);
                         }
                     }
-                    
-                    xmlhttp.send(null); 
-                })(group, list[group]);
-      
+
+                    xmlhttp.send(null);
+                })(group, list[group], last);
+
+                count++;
+
             }
         },
 
@@ -364,21 +353,21 @@ var Bookmark = (function($, Handlebars) {
             // atualiza o cache com os dados que ainda não existem
             // retorna apenas os ids que estiverem no bookmarks
 
-            var result = []; 
-          
+            var result = [];
+
             for (var prop in cache) {
                 if (bookmarks.indexOf(String(cache[prop].ID)) != -1)
-                    result.push(cache[prop]); 
+                    result.push(cache[prop]);
             }
 
-            return result; 
+            return result;
         },
 
         _init = function(options, afterLoad, itemClick) {
 
             //extende os parametros passados pelo usuário
             s = $.extend(true, {}, s, options);
-      
+
             //pega os elementos "bookmarks" na página
             var elements = document.querySelectorAll(s.element),
                 filtered;
@@ -386,42 +375,36 @@ var Bookmark = (function($, Handlebars) {
             //filtra esses elementos pelo data-id e data-group e cria um cache desse resultado
             _bookmarksMarkedCache = filtered = _filter(elements);
 
-            console.log(itemClick); 
-
             //adiciona o listner de click para cada objeto reconhecido como favorito
             _addClickListenerList(filtered, function($item, group, id) { // <- dentro do click em algum favoritos
                 //adiciona ou remove o item do localstorage e a marcação de activeAttr
                 var bookmarks = _isActiveBookmark($item) ? _remove($item, group, id) : _add($item, group, id);
-                
+
                 _currentSidebarData[group] = _filterFullData(_bookmarksDataCache[group], bookmarks[group]);
 
-                if (s.sidebar) 
+                if (s.sidebar)
                     _loadSidebar(_currentSidebarData);
-                
+
                 if (itemClick)
                     itemClick($item, _isActiveBookmark($item), _currentSidebarData);
                 return;
             });
-            
-            
+
+
             if (s.sidebar) {
-                
+
                 if (!s.url)
-                    throw "Parâmetro 'url' não definido"; 
+                    throw "Parâmetro 'url' não definido";
 
-                
-                var bookmarks = _getStorage(s.storage);       
-                
+
+                var bookmarks = _getStorage(s.storage);
+
                 // junta os bookmarks já marcados anteriormente com os detectados na página atual
-                var merged = _mergeBookmarks(bookmarks, _bookmarksMarkedCache); 
-
+                var merged = _mergeBookmarks(bookmarks, _bookmarksMarkedCache);
 
                 // cria um array de caminhos de api para esses bookmarks
-                var list = _generateApiList(merged); 
+                var list = _generateApiList(merged);
 
-
-                //_bookmarksObjectCache =  _getApiData(list); 
-                
                 /**
                  * @function
                  * _requestsApiList 
@@ -430,11 +413,11 @@ var Bookmark = (function($, Handlebars) {
                  * para ser executado quando a resposta retornar no servidor.
                  */
 
-                _requestsApiList(list, function(group, response){
+                _requestsApiList(list, function(group, response, last) {
 
                     // callback que será executado quando retornar cada request para API. 
                     // gravar objeto em uma variável 
-                   
+
                     if (group && response) {
 
                         //atualiza o cache
@@ -444,26 +427,23 @@ var Bookmark = (function($, Handlebars) {
                         // atualiza o cache com os dados que ainda não existem
                         // retorna apenas os ids que estiverem no bookmarks      
 
-                        var bookmarks = _getStorage(s.storage); 
+                        var bookmarks = _getStorage(s.storage);
                         //console.log(bookmarks);            
 
-                        _currentSidebarData[group] =  _filterFullData(_bookmarksDataCache[group], bookmarks[group]); 
+                        _currentSidebarData[group] = _filterFullData(_bookmarksDataCache[group], bookmarks[group]);
 
                     }
-
-                    //console.log(_bookmarksDataCache); 
-                    //console.log(currentSidebarData); 
 
                     // pesquisar no cache os itens que estão no _getStorage() atual e enviar para o _loadsidebar
                     // _loadsidebar também vai ter acesso ao cache. 
 
-                   _loadSidebar(_currentSidebarData);
-                    
-                    
-                });
+                    // a função _loadSideBar só pode ser executada quando a ultima requisição for retornada
 
+                    if (last)
+                        _loadSidebar(_currentSidebarData);
+                });
             }
-            
+
             if (afterLoad)
                 afterLoad(bookmarks);
         };
