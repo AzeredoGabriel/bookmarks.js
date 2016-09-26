@@ -293,10 +293,17 @@ var Bookmark = (function($, Handlebars) {
                 var group = detectedBookmarks[i].getAttribute("data-group");
                 var id = detectedBookmarks[i].getAttribute("data-id");
 
+                if (!bookmarks)
+                    var bookmarks = {}; 
+
                 if (bookmarks[group]) {
                     if (bookmarks[group].indexOf(id) == -1)
                         bookmarks[group].push(id);
+                } else {
+                    bookmarks[group] = []; 
+                    bookmarks[group].push(id); 
                 }
+                
             }
 
             return bookmarks;
@@ -327,6 +334,9 @@ var Bookmark = (function($, Handlebars) {
             var count = 1;
             var maxlength = Object.keys(list).length;
 
+            if (maxlength == 0)
+                count = 0; 
+
             for (var group in list) {
 
                 var last = (maxlength == count ? true : false);
@@ -354,12 +364,16 @@ var Bookmark = (function($, Handlebars) {
             // retorna apenas os ids que estiverem no bookmarks
 
             var result = [];
+            debugger
 
-            for (var prop in cache) {
-                if (bookmarks.indexOf(String(cache[prop].ID)) != -1)
-                    result.push(cache[prop]);
+            if (bookmarks) {
+                for (var prop in cache) {
+                    console.log(cache[prop].ID); 
+                    if (bookmarks.indexOf(String(cache[prop].ID)) != -1)
+                        result.push(cache[prop]);
+                }    
             }
-
+          
             return result;
         },
 
@@ -377,6 +391,7 @@ var Bookmark = (function($, Handlebars) {
 
             //adiciona o listner de click para cada objeto reconhecido como favorito
             _addClickListenerList(filtered, function($item, group, id) { // <- dentro do click em algum favoritos
+                debugger
                 //adiciona ou remove o item do localstorage e a marcação de activeAttr
                 var bookmarks = _isActiveBookmark($item) ? _remove($item, group, id) : _add($item, group, id);
 
@@ -390,20 +405,20 @@ var Bookmark = (function($, Handlebars) {
                 return;
             });
 
-
+            var bookmarks = _getStorage(s.storage);
+            
             if (s.sidebar) {
 
                 if (!s.url)
                     throw "Parâmetro 'url' não definido";
 
-
-                var bookmarks = _getStorage(s.storage);
-
                 // junta os bookmarks já marcados anteriormente com os detectados na página atual
+
                 var merged = _mergeBookmarks(bookmarks, _bookmarksMarkedCache);
 
                 // cria um array de caminhos de api para esses bookmarks
                 var list = _generateApiList(merged);
+
 
                 /**
                  * @function
@@ -412,7 +427,7 @@ var Bookmark = (function($, Handlebars) {
                  * Passamos como parâmetro uma lista de urls de API para cada group detectado e também passamos um callback 
                  * para ser executado quando a resposta retornar no servidor.
                  */
-
+                
                 _requestsApiList(list, function(group, response, last) {
 
                     // callback que será executado quando retornar cada request para API. 
@@ -442,6 +457,7 @@ var Bookmark = (function($, Handlebars) {
                     if (last)
                         _loadSidebar(_currentSidebarData);
                 });
+              
             }
 
             if (afterLoad)
