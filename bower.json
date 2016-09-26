@@ -1,0 +1,21 @@
+{
+  "name": "bookmarks.js",
+  "homepage": "https://github.com/AzeredoGabriel/bookmarks.js",
+  "authors": [
+    "Gabriel Almeida <gabriel.almeida@inforce.com.br>"
+  ],
+  "description": "",
+  "main": "js/bookmarks.js",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  }
+}

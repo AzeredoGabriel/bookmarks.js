@@ -1,0 +1,457 @@
+{
+   "totalCount":1107,
+   "page":1,
+   "pagesize":10,
+   "items":[
+      {
+         "ID":1,
+         "Codigo":"BC30773",
+         "ValorVenda":1999000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"Av. Prefeito Dulcidio Cardoso",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Barra da Tijuca",
+         "QtdQuarto":3,
+         "QtdSuite":2,
+         "QtdVaga":2,
+         "QtdWcTotal":1,
+         "AreaTotal":182.0,
+         "AreaUtil":182.0,
+         "TipoID":5,
+         "TipoIcone":"_global/img/ico_cobertura.gif",
+         "TipoNome":"Cobertura",
+         "TipoSubTipo":"Apartamento Padrão",
+         "TipoCategoria":"Cobertura",
+         "HasImagem":true,
+         "Url":"cobertura-barra-da-tijuca-3-quartos/73236",
+         "Imagens":[
+            {
+               "ImagemID":2777797,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69305/2777797.jpg"
+            },
+            {
+               "ImagemID":2777798,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69305/2777798.jpg"
+            },
+            {
+               "ImagemID":2777799,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69305/2777799.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":2,
+         "Codigo":"BA26826",
+         "ValorVenda":650000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"Av das Américas",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Recreio dos Bandeirantes",
+         "QtdQuarto":2,
+         "QtdSuite":1,
+         "QtdVaga":1,
+         "QtdWcTotal":1,
+         "AreaTotal":83.0,
+         "AreaUtil":83.0,
+         "TipoID":2,
+         "TipoIcone":"_global/img/ico_apto.gif",
+         "TipoNome":"Apartamento",
+         "TipoSubTipo":"Apartamento Padrão",
+         "TipoCategoria":"Padrão",
+         "HasImagem":true,
+         "Url":"apartamento-recreio-dos-bandeirantes-2-quartos/73235",
+         "Imagens":[
+            {
+               "ImagemID":2777829,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69306/2777829.jpg"
+            },
+            {
+               "ImagemID":2777830,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69306/2777830.jpg"
+            },
+            {
+               "ImagemID":2777831,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69306/2777831.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":3,
+         "Codigo":"BC40727",
+         "ValorVenda":1600000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"AVENIDA DAS AMÉRICAS",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Barra da Tijuca",
+         "QtdQuarto":4,
+         "QtdSuite":2,
+         "QtdVaga":3,
+         "QtdWcTotal":2,
+         "AreaTotal":230.0,
+         "AreaUtil":230.0,
+         "TipoID":5,
+         "TipoIcone":"_global/img/ico_cobertura.gif",
+         "TipoNome":"Cobertura",
+         "TipoSubTipo":"Apartamento Padrão",
+         "TipoCategoria":"Cobertura",
+         "HasImagem":true,
+         "Url":"cobertura-barra-da-tijuca-4-quartos/73234",
+         "Imagens":[
+            {
+               "ImagemID":2776800,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69285/2776800.jpg"
+            },
+            {
+               "ImagemID":2776801,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69285/2776801.jpg"
+            },
+            {
+               "ImagemID":2776802,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69285/2776802.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":4,
+         "Codigo":"BA46648",
+         "ValorVenda":2290000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"AVENIDA PREFEITO DULCÍDIO CARDOSO",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Barra da Tijuca",
+         "QtdQuarto":4,
+         "QtdSuite":2,
+         "QtdVaga":3,
+         "QtdWcTotal":2,
+         "AreaTotal":220.0,
+         "AreaUtil":220.0,
+         "TipoID":2,
+         "TipoIcone":"_global/img/ico_apto.gif",
+         "TipoNome":"Apartamento",
+         "TipoSubTipo":"Apartamento Padrão",
+         "TipoCategoria":"Padrão",
+         "HasImagem":true,
+         "Url":"apartamento-barra-da-tijuca-4-quartos/73233",
+         "Imagens":[
+            {
+               "ImagemID":2776820,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69286/2776820.jpg"
+            },
+            {
+               "ImagemID":2776832,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69286/2776832.jpg"
+            },
+            {
+               "ImagemID":2776833,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69286/2776833.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":5,
+         "Codigo":"BC20722",
+         "ValorVenda":1370000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"AVENIDA DAS AMÉRICAS",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Recreio dos Bandeirantes",
+         "QtdQuarto":2,
+         "QtdSuite":2,
+         "QtdVaga":2,
+         "QtdWcTotal":2,
+         "AreaTotal":140.0,
+         "AreaUtil":140.0,
+         "TipoID":5,
+         "TipoIcone":"_global/img/ico_cobertura.gif",
+         "TipoNome":"Cobertura",
+         "TipoSubTipo":"Apartamento Padrão",
+         "TipoCategoria":"Cobertura",
+         "HasImagem":true,
+         "Url":"cobertura-recreio-dos-bandeirantes-2-quartos/73232",
+         "Imagens":[
+            {
+               "ImagemID":2776868,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69287/2776868.jpg"
+            },
+            {
+               "ImagemID":2776869,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69287/2776869.jpg"
+            },
+            {
+               "ImagemID":2776870,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69287/2776870.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":6,
+         "Codigo":"BC40684",
+         "ValorVenda":4750000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"RUA GENERAL LOBATO FILHO",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Barra da Tijuca",
+         "QtdQuarto":4,
+         "QtdSuite":4,
+         "QtdVaga":3,
+         "QtdWcTotal":1,
+         "AreaTotal":340.0,
+         "AreaUtil":340.0,
+         "TipoID":5,
+         "TipoIcone":"_global/img/ico_cobertura.gif",
+         "TipoNome":"Cobertura",
+         "TipoSubTipo":"Apartamento Padrão",
+         "TipoCategoria":"Cobertura",
+         "HasImagem":true,
+         "Url":"cobertura-barra-da-tijuca-4-quartos/73231",
+         "Imagens":[
+            {
+               "ImagemID":2776888,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69288/2776888.jpg"
+            },
+            {
+               "ImagemID":2776889,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69288/2776889.jpg"
+            },
+            {
+               "ImagemID":2776890,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69288/2776890.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":7,
+         "Codigo":"BR42385",
+         "ValorVenda":848000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"TRAVESSA PRÓPRIA",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Méier",
+         "QtdQuarto":4,
+         "QtdSuite":4,
+         "QtdVaga":3,
+         "QtdWcTotal":2,
+         "AreaTotal":238.0,
+         "AreaUtil":238.0,
+         "TipoID":1,
+         "TipoIcone":"_global/img/ico_casa.gif",
+         "TipoNome":"Casa",
+         "TipoSubTipo":"Casa Padrão",
+         "TipoCategoria":"Térrea",
+         "HasImagem":true,
+         "Url":"casa-meier-4-quartos/73230",
+         "Imagens":[
+            {
+               "ImagemID":2776908,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69289/2776908.jpg"
+            },
+            {
+               "ImagemID":2776909,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69289/2776909.jpg"
+            },
+            {
+               "ImagemID":2776910,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69289/2776910.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":8,
+         "Codigo":"BR22747",
+         "ValorVenda":550000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"rua piloto",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Cabo Frio",
+         "BairroNome":"PerÓ",
+         "QtdQuarto":2,
+         "QtdSuite":1,
+         "QtdVaga":3,
+         "QtdWcTotal":1,
+         "AreaTotal":0.0,
+         "AreaUtil":0.0,
+         "TipoID":1,
+         "TipoIcone":"_global/img/ico_casa.gif",
+         "TipoNome":"Casa",
+         "TipoSubTipo":"Casa Padrão",
+         "TipoCategoria":"Térrea",
+         "HasImagem":true,
+         "Url":"casa-pero-2-quartos/73229",
+         "Imagens":[
+            {
+               "ImagemID":2776928,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69290/2776928.jpg"
+            },
+            {
+               "ImagemID":2776929,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69290/2776929.jpg"
+            },
+            {
+               "ImagemID":2776930,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69290/2776930.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":9,
+         "Codigo":"BR32753",
+         "ValorVenda":1800000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"RUA IURY XAVIER PEREIRA",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Recreio dos Bandeirantes",
+         "QtdQuarto":3,
+         "QtdSuite":0,
+         "QtdVaga":0,
+         "QtdWcTotal":0,
+         "AreaTotal":0.0,
+         "AreaUtil":0.0,
+         "TipoID":1,
+         "TipoIcone":"_global/img/ico_casa.gif",
+         "TipoNome":"Casa",
+         "TipoSubTipo":"Casa Padrão",
+         "TipoCategoria":"Térrea",
+         "HasImagem":true,
+         "Url":"casa-recreio-dos-bandeirantes-3-quartos/73226",
+         "Imagens":[
+            {
+               "ImagemID":2777043,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69293/2777043.jpg"
+            },
+            {
+               "ImagemID":2777044,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69293/2777044.jpg"
+            },
+            {
+               "ImagemID":2777045,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69293/2777045.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      },
+      {
+         "ID":10,
+         "Codigo":"BA31531",
+         "ValorVenda":400000.0,
+         "ValorVendaPromocional":0.0,
+         "ValorLocacao":0.0,
+         "Logradouro":"EST. DOS BANDEIRANTES",
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeNome":"Rio de Janeiro",
+         "BairroNome":"Curicica",
+         "QtdQuarto":3,
+         "QtdSuite":2,
+         "QtdVaga":1,
+         "QtdWcTotal":1,
+         "AreaTotal":69.0,
+         "AreaUtil":69.0,
+         "TipoID":2,
+         "TipoIcone":"_global/img/ico_apto.gif",
+         "TipoNome":"Apartamento",
+         "TipoSubTipo":"Apartamento Padrão",
+         "TipoCategoria":"Padrão",
+         "HasImagem":true,
+         "Url":"apartamento-curicica-3-quartos/73225",
+         "Imagens":[
+            {
+               "ImagemID":2777074,
+               "FlagCapa":true,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69294/2777074.jpg"
+            },
+            {
+               "ImagemID":2777088,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69294/2777088.jpg"
+            },
+            {
+               "ImagemID":2777089,
+               "FlagCapa":false,
+               "ImagePath":"_custom/galeria_imagem/2016/9/69294/2777089.jpg"
+            }
+         ],
+         "Anuncios":[
+
+         ]
+      }
+   ]
+}

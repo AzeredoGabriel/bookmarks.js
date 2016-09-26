@@ -1,0 +1,445 @@
+{
+   "totalCount":192,
+   "page":1,
+   "pagesize":10,
+   "items":[
+      {
+         "ID":1,
+         "Nome":"Emotion Life & Joy",
+         "Descricao":"",
+         "M2Menor":56.0,
+         "M2Maior":102.0,
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":4,
+         "NaturezaNome":"Misto",
+         "Localizacao":"Avenida Geremário Dantas, 509",
+         "MapaLatitude":"-22.925663",
+         "MapaLongitude":"-43.357213",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":21,
+         "BairroNome":"Jacarepaguá",
+         "FlagPublico":true,
+         "QtdQuarto":[
+            "2",
+            "3"
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Apartamento"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/521?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/521/fachada.jpg",
+         "Url":"emotion-life-&-joy/521"
+      },
+      {
+         "ID":2,
+         "Nome":"Magic Reserve",
+         "Descricao":"",
+         "M2Menor":124.0,
+         "M2Maior":238.0,
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":2,
+         "NaturezaNome":"Residencial",
+         "Localizacao":"W. Irlo Bronson Memorial Hwy",
+         "MapaLatitude":"28.332653",
+         "MapaLongitude":"-81.539523",
+         "EstadoID":28,
+         "EstadoNome":"Florida (Estados Unidos)",
+         "EstadoSigla":"FL",
+         "CidadeID":48,
+         "CidadeNome":"Kissimmee",
+         "BairroID":604,
+         "BairroNome":"Kissimmee",
+         "FlagPublico":true,
+         "QtdQuarto":[
+            "2",
+            "3",
+            "4"
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Apartamento",
+            "Cobertura"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/520?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/520/fachada.jpg",
+         "Url":"magic-reserve/520"
+      },
+      {
+         "ID":3,
+         "Nome":"Mozak Pepê",
+         "Descricao":"",
+         "M2Menor":293.0,
+         "M2Maior":415.0,
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":2,
+         "NaturezaNome":"Residencial",
+         "Localizacao":"Avenida do Pepê, 1014",
+         "MapaLatitude":"-23.014820",
+         "MapaLongitude":"-43.308878",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":1,
+         "BairroNome":"Barra da Tijuca",
+         "FlagPublico":true,
+         "QtdQuarto":[
+
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Apartamento",
+            "Cobertura"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+            "Lançamento"
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/519?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/519/fachada.jpg",
+         "Url":"mozak-pepe/519"
+      },
+      {
+         "ID":4,
+         "Nome":"Elegance Freguesia",
+         "Descricao":"",
+         "M2Menor":68.0,
+         "M2Maior":154.0,
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":2,
+         "NaturezaNome":"Residencial",
+         "Localizacao":"Rua Alcides Lima, 225",
+         "MapaLatitude":"-22.944940",
+         "MapaLongitude":"-43.337564",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":4223,
+         "BairroNome":"Freguesia",
+         "FlagPublico":true,
+         "QtdQuarto":[
+
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Apartamento",
+            "Cobertura"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/518?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/518/fachada.jpg",
+         "Url":"elegance-freguesia/518"
+      },
+      {
+         "ID":5,
+         "Nome":"Alcacer Prata Residencial",
+         "Descricao":"",
+         "M2Menor":71.0,
+         "M2Maior":162.0,
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":2,
+         "NaturezaNome":"Residencial",
+         "Localizacao":"Rua Avaré, 495",
+         "MapaLatitude":"-22.913158",
+         "MapaLongitude":"-43.561737",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":34,
+         "BairroNome":"Campo Grande",
+         "FlagPublico":true,
+         "QtdQuarto":[
+            "2",
+            "3"
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Apartamento"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+            "Lançamento"
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/517?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/517/fachada.jpg",
+         "Url":"alcacer-prata-residencial/517"
+      },
+      {
+         "ID":6,
+         "Nome":"Live Offices",
+         "Descricao":"",
+         "M2Maior":20.0,
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":3,
+         "NaturezaNome":"Comercial",
+         "Localizacao":"Estrada do Tindiba, 3.250",
+         "MapaLatitude":"-22.928770",
+         "MapaLongitude":"-43.355199",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":519,
+         "BairroNome":"Taquara (Jacarepaguá)",
+         "FlagPublico":true,
+         "QtdQuarto":[
+
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Escritório",
+            "Sala"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/515?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/515/fachada.jpg",
+         "Url":"live-offices/515"
+      },
+      {
+         "ID":7,
+         "Nome":"Grand Park Prime Clube",
+         "Descricao":"",
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":2,
+         "NaturezaNome":"Residencial",
+         "Localizacao":"Estrada do Cabuçu de Baixo, 601",
+         "MapaLatitude":"-22.908078",
+         "MapaLongitude":"-43.551903",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":34,
+         "BairroNome":"Campo Grande",
+         "FlagPublico":true,
+         "QtdQuarto":[
+
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Casa"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/514?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/514/fachada.jpg",
+         "Url":"grand-park-prime-clube/514"
+      },
+      {
+         "ID":513,
+         "Nome":"Fiori Residências",
+         "Descricao":"",
+         "M2Menor":56.0,
+         "M2Maior":111.0,
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":2,
+         "NaturezaNome":"Residencial",
+         "Localizacao":"Rua José Soares Ferreira, s/nº",
+         "MapaLatitude":"-18.903065",
+         "MapaLongitude":"-48.293339",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":34,
+         "BairroNome":"Campo Grande",
+         "FlagPublico":true,
+         "QtdQuarto":[
+
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Apartamento",
+            "Cobertura"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/513?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/513/fachada.jpg",
+         "Url":"fiori-residencias/513"
+      },
+      {
+         "ID":512,
+         "Nome":"Adryana Varandas Residences",
+         "Descricao":"",
+         "M2Menor":50.0,
+         "M2Maior":74.0,
+         "StatusID":2,
+         "StatusNome":"Lançamento",
+         "NaturezaID":2,
+         "NaturezaNome":"Residencial",
+         "Localizacao":"Estrada da Posse, 3.405",
+         "MapaLatitude":"-22.874177",
+         "MapaLongitude":"-43.514051",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":34,
+         "BairroNome":"Campo Grande",
+         "FlagPublico":true,
+         "QtdQuarto":[
+            "2"
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Apartamento",
+            "Cobertura"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/512?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/512/fachada.jpg",
+         "Url":"adryana-varandas-residences/512"
+      },
+      {
+         "ID":511,
+         "Nome":"3R Offices",
+         "Descricao":"",
+         "M2Menor":57.0,
+         "M2Maior":22.0,
+         "StatusID":4,
+         "StatusNome":"Pronto",
+         "NaturezaID":3,
+         "NaturezaNome":"Comercial",
+         "Localizacao":"Estrada dos Três Rios, 1086",
+         "MapaLatitude":"-22.936630",
+         "MapaLongitude":"-43.333662",
+         "EstadoID":14,
+         "EstadoNome":"Rio de Janeiro",
+         "EstadoSigla":"RJ",
+         "CidadeID":1,
+         "CidadeNome":"Rio de Janeiro",
+         "BairroID":4223,
+         "BairroNome":"Freguesia",
+         "FlagPublico":true,
+         "QtdQuarto":[
+
+         ],
+         "Construtoras":[
+
+         ],
+         "Tipos":[
+            "Escritório",
+            "Sala"
+         ],
+         "Status":[
+
+         ],
+         "Categorias":[
+
+         ],
+         "Topicos":[
+
+         ],
+         "ImagemCapaPath":"/Empreendimento/ImageCapa/511?key=2071AB51-DAD9-45BC-A7C9-57FE98E5A71D",
+         "FachadaImagePath":"/_custom/empreendimento/fichavenda/511/fachada.jpg",
+         "Url":"3r-offices/511"
+      }
+   ]
+}
